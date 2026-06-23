@@ -1,0 +1,12 @@
+node_modules
+dist
+dist-ssr
+*.local
+.DS_Store
+.vite
+
+# Internal tooling / planning — keep out of the public repo
+.claude/
+.agents/
+skills-lock.json
+portfolio_plan.md

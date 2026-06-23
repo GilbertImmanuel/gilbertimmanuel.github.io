@@ -1,0 +1,235 @@
+@import 'tailwindcss';
+
+/* ===================== Design tokens (Iuno theme) ===================== */
+:root {
+  --bg: #070a1a;
+  --surface: rgba(20, 28, 56, 0.85);
+  --surface-soft: rgba(20, 28, 56, 0.4);
+
+  --gold: #e6cf9a;
+  --gold-deep: #c9a86a;
+  --gold-line: rgba(201, 168, 106, 0.5);
+  --gold-faint: rgba(201, 168, 106, 0.22);
+
+  --ice: #9ec6e8;
+  --ice-soft: #cfe0f2;
+  --ice-line: rgba(158, 198, 232, 0.28);
+
+  --text: #f4f0e6;
+  --text-warm: #e7e3d6;
+  --muted: #aeb6cc;
+  --muted-dim: #7f8bab;
+  --muted-faint: #5e6a8c;
+
+  --font-display: 'Cormorant Garamond', Georgia, serif;
+  --font-body: 'Manrope', system-ui, sans-serif;
+  --font-mono: 'Space Mono', ui-monospace, monospace;
+
+  /* Emil/animations.dev easing curves — stronger than the CSS built-ins */
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+  --ease-drawer: cubic-bezier(0.32, 0.72, 0, 1);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 0;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Layered navy glows behind the whole page (ported from the mockup wrapper).
+   The percentages span the full document height, so each glow sits at a different
+   scroll depth (top → Hero, upper-right → Projects, lower-left → About, bottom →
+   Contact) and scrolls WITH the page — matching the design. Do NOT set
+   `background-attachment: fixed`: that pins all four glows to the viewport at once,
+   so they read as static blue blobs instead of drifting past as you scroll. */
+body {
+  min-height: 100svh;
+  background-image:
+    radial-gradient(85% 26% at 50% 7%, rgba(42, 58, 116, 0.5) 0%, rgba(7, 10, 26, 0) 60%),
+    radial-gradient(70% 22% at 100% 31%, rgba(30, 44, 92, 0.42) 0%, rgba(7, 10, 26, 0) 55%),
+    radial-gradient(72% 22% at 0% 63%, rgba(36, 52, 104, 0.42) 0%, rgba(7, 10, 26, 0) 55%),
+    radial-gradient(95% 26% at 50% 96%, rgba(42, 58, 116, 0.55) 0%, rgba(7, 10, 26, 0) 62%);
+}
+
+/* Every section fills the viewport when reached via a burger anchor (owner request).
+   min-height (not height) so content-heavy sections can grow on small screens. */
+.section {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  min-height: 100svh;
+  overflow: hidden;
+  scroll-margin-top: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+a {
+  color: inherit;
+}
+
+/* Skip-to-content link — visually hidden until keyboard-focused (single-page nav a11y) */
+.skip-link {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 200;
+  transform: translateY(-120%);
+  padding: 12px 20px;
+  background: var(--gold);
+  color: #0b1024;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: 700;
+  text-decoration: none;
+  border-radius: 0 0 6px 0;
+  transition: transform 0.2s var(--ease-out);
+}
+.skip-link:focus {
+  transform: translateY(0);
+  outline: 2px solid #0b1024;
+  outline-offset: -4px;
+}
+
+/* ===================== Interaction states (hover gated to pointer devices) ===================== */
+.cta {
+  transition: transform 0.25s var(--ease-out), box-shadow 0.25s var(--ease-out);
+}
+.cta:active {
+  transform: translateY(0) scale(0.97);
+}
+.scroll-cue {
+  transition: color 0.3s var(--ease-out), filter 0.3s var(--ease-out);
+}
+.menu-link {
+  transition: color 0.3s var(--ease-out), letter-spacing 0.3s var(--ease-out),
+    text-shadow 0.3s var(--ease-out), transform 0.3s var(--ease-out);
+}
+.social-icon {
+  transition: border-color 0.25s var(--ease-out), color 0.25s var(--ease-out),
+    transform 0.25s var(--ease-out), box-shadow 0.25s var(--ease-out);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .cta:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 22px rgba(230, 207, 154, 0.32);
+  }
+  .scroll-cue:hover {
+    color: var(--gold);
+    filter: drop-shadow(0 0 10px rgba(230, 207, 154, 0.55));
+  }
+  .menu-link:hover {
+    color: var(--gold);
+    font-style: italic;
+    letter-spacing: 0.04em;
+    transform: translateY(-2px);
+    text-shadow: 0 0 22px rgba(230, 207, 154, 0.5);
+  }
+  .social-icon:hover {
+    border-color: var(--gold);
+    color: var(--gold);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(230, 207, 154, 0.22);
+  }
+}
+
+/* Keyboard focus parity with hover (a11y) — visible indicator, not color-only */
+.menu-link:focus-visible {
+  color: var(--gold);
+  outline: 2px solid var(--gold);
+  outline-offset: 6px;
+  border-radius: 4px;
+}
+.social-icon:focus-visible,
+.cta:focus-visible,
+.scroll-cue:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+/* Burger trigger + any future buttons */
+button:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 3px;
+}
+/* Keyboard focus ring for the clickable constellation stars (SVG groups) */
+.const-star {
+  outline: none;
+}
+.const-star:focus-visible {
+  outline: 2px solid var(--ice);
+  outline-offset: 2px;
+  border-radius: 50%;
+}
+
+/* ===================== Keyframes (ported verbatim from the mockup) ===================== */
+@keyframes twinkle {
+  0%, 100% { opacity: 0.2; }
+  50% { opacity: 1; }
+}
+@keyframes moonFloat {
+  0%, 100% { transform: translate(-50%, -50%); }
+  50% { transform: translate(-50%, calc(-50% - 12px)); }
+}
+@keyframes roleCycle {
+  0%, 24% { transform: translateY(0); }
+  33%, 57% { transform: translateY(-46px); }
+  66%, 90% { transform: translateY(-92px); }
+  99%, 100% { transform: translateY(-138px); }
+}
+@keyframes constDwell {
+  0%, 64%, 100% { opacity: 0; }
+  75%, 91% { opacity: 1; }
+}
+@keyframes arrowBob {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(5px); }
+}
+@keyframes drawLine {
+  from { stroke-dashoffset: 1; }
+  to { stroke-dashoffset: 0; }
+}
+@keyframes cardFade {
+  /* slight blur masks the crossfade so the swap reads as one motion, not two cards */
+  from { opacity: 0; transform: translateY(14px); filter: blur(6px); }
+  to { opacity: 1; transform: none; filter: blur(0); }
+}
+@keyframes menuItemIn {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: none; }
+}
+@keyframes eclipseSpin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* ===================== Reduced motion ===================== */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}

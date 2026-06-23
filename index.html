@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="color-scheme" content="dark" />
+    <meta name="theme-color" content="#070a1a" />
+    <!-- Paint the navy background before CSS loads to avoid a white flash. -->
+    <style>
+      html { background: #070a1a; }
+    </style>
+
+    <title>Gilbert Immanuel Hasiholan · Data & AI Portfolio</title>
+    <meta
+      name="description"
+      content="Gilbert Immanuel Hasiholan · Data Analyst, Business Analyst, and AI Developer turning messy, real-world data into reproducible pipelines, predictive models, and decision-ready dashboards."
+    />
+    <meta name="author" content="Gilbert Immanuel Hasiholan" />
+
+    <!-- Open Graph / Twitter. Set og:url + og:image to absolute URLs on deploy. -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Gilbert Immanuel Hasiholan" />
+    <meta property="og:title" content="Gilbert Immanuel Hasiholan · Data & AI Portfolio" />
+    <meta
+      property="og:description"
+      content="Data Analyst, Business Analyst, and AI Developer turning messy, real-world data into reproducible pipelines, predictive models, and decision-ready dashboards."
+    />
+    <meta property="og:locale" content="en_US" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Gilbert Immanuel Hasiholan · Data & AI Portfolio" />
+    <meta
+      name="twitter:description"
+      content="Data Analyst, Business Analyst, and AI Developer turning messy data into pipelines, models, and decision-ready dashboards."
+    />
+
+    <!-- Self-hosted fonts (see src/fonts.css). Preload the two used above the fold. -->
+    <link rel="preload" href="/fonts/cormorant-normal-500.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/manrope-normal-400.woff2" as="font" type="font/woff2" crossorigin />
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>
