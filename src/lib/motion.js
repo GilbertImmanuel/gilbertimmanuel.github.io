@@ -1,5 +1,5 @@
-// Shared Framer Motion config. Kept tiny on purpose — most motion in this site is
-// CSS keyframes (off main thread). Framer is only for scroll-reveal entrances.
+// Shared Motion config. Kept tiny on purpose: most motion in this site is CSS
+// keyframes (off main thread). Motion is only used for scroll-reveal entrances.
 export const reveal = {
   hidden: { opacity: 0, y: 18 },
   show: {

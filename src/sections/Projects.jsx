@@ -74,7 +74,7 @@ export default function Projects() {
     return () => mql.removeEventListener('change', sync)
   }, [])
 
-  // Pause auto-cycle on a hidden tab (Emil edge case — don't advance unseen).
+  // Pause the auto-cycle while the tab is hidden so it does not advance unseen.
   useEffect(() => {
     const onVis = () => setHidden(document.hidden)
     document.addEventListener('visibilitychange', onVis)

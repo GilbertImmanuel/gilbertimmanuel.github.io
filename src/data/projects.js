@@ -18,6 +18,20 @@ export const projects = [
   {
     num: '02',
     category: 'Data · Tableau',
+    title: 'Anime Analytics Dashboard',
+    image: '/images/anime.webp',
+    imgH: 571,
+    tags: ['Python', 'Pandas', 'SciPy', 'Tableau'],
+    blurb:
+      'Star-schema model of 15,039 anime titles (2000-2026) from the AniList GraphQL API, presented as 8 charts across two Tableau tabs. A Kruskal-Wallis test (H=1560, p<0.001) puts light novel adaptations top at a 67.2 mean score against 57.4 for visual novels, and flags 1,175 hidden gems above median score but below median popularity.',
+    links: {
+      live: 'https://public.tableau.com/app/profile/gilbert.immanuel3630/viz/AnimeAnalyticsDashboard_17841098061660/Overview',
+      repo: 'https://github.com/GilbertImmanuel/anilist-anime-analysis',
+    },
+  },
+  {
+    num: '03',
+    category: 'Data · Tableau',
     title: 'Global Financial Inclusion',
     image: '/images/finance.webp',
     imgH: 800,
@@ -30,7 +44,7 @@ export const projects = [
     },
   },
   {
-    num: '03',
+    num: '04',
     category: 'Thesis · AI / OCR',
     title: 'Indonesian Essay AI Scoring System',
     image: '/images/essay.webp',
@@ -44,7 +58,7 @@ export const projects = [
     },
   },
   {
-    num: '04',
+    num: '05',
     category: 'Award-winning · Web',
     title: 'Summasphere',
     image: '/images/summasphere.webp',
@@ -57,7 +71,7 @@ export const projects = [
     },
   },
   {
-    num: '05',
+    num: '06',
     category: 'Bangkit Capstone · Mobile',
     title: 'FoodWise',
     image: '/images/foodwise.webp',

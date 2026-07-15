@@ -2,7 +2,9 @@ import { useMemo } from 'react'
 import { PROJECT_NODES, PROJECT_EDGES, bfs } from '../lib/constellations.js'
 import { projects } from '../data/projects.js'
 
-const PROJECT_COUNT = 5 // first 5 nodes are the projects; the rest fill the figure
+// The project count comes from the data, not a constant: the first projects.length
+// nodes are interactive stars, the rest fill the figure. Adding a project to
+// projects.js is all it takes (ceiling: PROJECT_NODES has 9 points).
 
 // Static faint background dots — deterministic per the mockup's standalone RNG, so
 // the field never reshuffles on re-render (active changes every 4800ms).
@@ -19,7 +21,7 @@ function makeBgDots() {
   }))
 }
 
-// Interactive constellation navigator. The 5 project stars are clickable + keyboard-
+// Interactive constellation navigator. The project stars are clickable + keyboard-
 // operable; the BFS shortest path between prev→active is drawn as a tracer that replays
 // (via the React key) each jump. Active/prev/nonce are owned by the Projects section.
 export default function ProjectConstellation({ active, prev, nonce, onSelect }) {
@@ -79,10 +81,10 @@ export default function ProjectConstellation({ active, prev, nonce, onSelect }) 
         />
       )}
 
-      {/* stars: first 5 are interactive projects, the rest are filler nodes */}
+      {/* stars: the first projects.length nodes are interactive, the rest are filler */}
       <g>
         {PROJECT_NODES.map((p, i) => {
-          if (i >= PROJECT_COUNT) {
+          if (i >= projects.length) {
             return <circle key={'dn' + i} cx={p[0]} cy={p[1]} r={2.4} fill="#aebcd8" opacity={0.55} aria-hidden="true" />
           }
           const isA = i === active

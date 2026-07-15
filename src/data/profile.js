@@ -1,4 +1,4 @@
-// Fixed personal content. Sourced from the CV + the approved Iuno mockup.
+// Fixed personal content. Sourced from the CV + the approved night-sky mockup.
 export const profile = {
   name: 'Gilbert Immanuel Hasiholan',
   nameLines: ['Gilbert Immanuel', 'Hasiholan'],
