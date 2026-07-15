@@ -100,8 +100,6 @@ export default function Projects() {
       id="projects"
       className="section"
       aria-label="Projects"
-      onMouseEnter={() => setHovering(true)}
-      onMouseLeave={() => setHovering(false)}
       onFocus={() => setFocused(true)}
       onBlur={() => setFocused(false)}
     >
@@ -139,8 +137,15 @@ export default function Projects() {
             flexWrap: 'wrap',
           }}
         >
-          {/* LEFT — active project card (remounts with cardFade on change) */}
-          <div style={{ flex: '1 1 520px', minWidth: 320 }}>
+          {/* LEFT — active project card (remounts with cardFade on change).
+              The hover pause lives on this wrapper, not the section (which is full-viewport,
+              so it would pause forever) and not the card (which remounts, so a remount under
+              the cursor could swallow mouseleave and strand it paused). */}
+          <div
+            style={{ flex: '1 1 520px', minWidth: 320 }}
+            onMouseEnter={() => setHovering(true)}
+            onMouseLeave={() => setHovering(false)}
+          >
             <div
               key={s.active}
               style={{

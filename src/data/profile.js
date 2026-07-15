@@ -9,7 +9,7 @@ export const profile = {
     'Fresh IT grad turning messy, real-world data into reproducible pipelines, predictive models, and decision-ready dashboards.',
 
   location: 'Jakarta, Indonesia',
-  cvPath: '/cv/CV_June2026_GilbertImmanuelHasiholan.pdf',
+  cvPath: '/cv/CV_July2026_GilbertImmanuelHasiholan.pdf',
 
   socials: {
     email: 'gilbertimmanuel13@gmail.com',
