@@ -31,6 +31,19 @@ export const projects = [
   },
   {
     num: '03',
+    category: 'Data · SQL',
+    title: 'Barcelona Airbnb Pricing & Market Analysis',
+    image: '/images/barcelona.webp',
+    imgH: 776,
+    tags: ['SQL', 'PostgreSQL', 'Python', 'Pandas'],
+    blurb:
+      'SQL and PostgreSQL market study of 13,355 Barcelona Airbnb listings, benchmarking each against city-wide peers by room type and neighbourhood. Multi-listing hosts hold 84.1% of supply, and the share of under-priced listings runs from 35% to 88% across districts, exposing a clear operator market.',
+    links: {
+      repo: 'https://github.com/GilbertImmanuel/barcelona-airbnb-pricing',
+    },
+  },
+  {
+    num: '04',
     category: 'Data · Tableau',
     title: 'Global Financial Inclusion',
     image: '/images/finance.webp',
@@ -44,7 +57,7 @@ export const projects = [
     },
   },
   {
-    num: '04',
+    num: '05',
     category: 'Thesis · AI / OCR',
     title: 'Indonesian Essay AI Scoring System',
     image: '/images/essay.webp',
@@ -58,7 +71,7 @@ export const projects = [
     },
   },
   {
-    num: '05',
+    num: '06',
     category: 'Award-winning · Web',
     title: 'Summasphere',
     image: '/images/summasphere.webp',
@@ -71,7 +84,7 @@ export const projects = [
     },
   },
   {
-    num: '06',
+    num: '07',
     category: 'Bangkit Capstone · Mobile',
     title: 'FoodWise',
     image: '/images/foodwise.webp',

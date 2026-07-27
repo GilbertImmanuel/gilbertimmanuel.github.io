@@ -34,7 +34,7 @@ export const HERO_CONSTELLATIONS = [
 ]
 
 // Projects navigator constellation. The first projects.length nodes are the project stars
-// (6 today); the rest fill the figure. Nodes 0-5 are all edge-connected, so bfs() can always
+// (7 today); the rest fill the figure. Nodes 0-6 are all edge-connected, so bfs() can always
 // route a tracer between any two projects. Adding a 10th project needs new nodes + edges.
 export const PROJECT_NODES = [
   [90, 118], [240, 150], [165, 330], [345, 275], [412, 398],

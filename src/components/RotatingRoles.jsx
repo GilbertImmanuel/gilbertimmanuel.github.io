@@ -18,6 +18,7 @@ export default function RotatingRoles() {
               style={{
                 height: 46,
                 lineHeight: '40px',
+                whiteSpace: 'nowrap',
                 fontFamily: 'var(--font-body)',
                 fontWeight: 500,
                 fontSize: 19,
