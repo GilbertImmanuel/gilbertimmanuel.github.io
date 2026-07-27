@@ -1,9 +1,10 @@
-import { useCallback, useEffect, useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import Starfield from '../components/Starfield.jsx'
 import ProjectConstellation from '../components/ProjectConstellation.jsx'
 import { projects } from '../data/projects.js'
 
 const AUTO_CYCLE_MS = 4800
+const IDLE_RESUME_MS = 12000
 const PRIMARY_LABELS = { live: 'Live Demo →', slides: 'Slides →', org: 'View Org →' }
 
 // CTAs are driven off whichever link fields exist: one primary (gold) from
@@ -55,15 +56,35 @@ const tagStyle = {
 export default function Projects() {
   const [s, setS] = useState({ active: 0, prev: 0, nonce: 0 })
   const [hovering, setHovering] = useState(false)
-  const [focused, setFocused] = useState(false)
+  const [engaged, setEngaged] = useState(false)
   const [hidden, setHidden] = useState(false)
   const [reduced, setReduced] = useState(false)
+  const idleRef = useRef()
 
-  // Jump to a project (user-driven). Re-arms the auto-cycle automatically since the
-  // effect below is keyed on s.active.
-  const go = useCallback((i) => {
-    setS((cur) => (i === cur.active ? cur : { prev: cur.active, active: i, nonce: cur.nonce + 1 }))
+  // Advance to the next project (wraps).
+  const advance = useCallback(() => {
+    setS((cur) => ({ prev: cur.active, active: (cur.active + 1) % projects.length, nonce: cur.nonce + 1 }))
   }, [])
+
+  // Mark a user interaction: pause the auto-cycle, then resume it IDLE_RESUME_MS after the
+  // last interaction by advancing once (which hands control back to the auto-cycle effect).
+  // Focusing a star (via click or Tab) would otherwise pin the cycle forever, since nothing
+  // blurs it. Re-arming on every touch keeps it paused while the user keeps interacting.
+  const touch = useCallback(() => {
+    setEngaged(true)
+    clearTimeout(idleRef.current)
+    idleRef.current = setTimeout(() => {
+      setEngaged(false)
+      advance()
+    }, IDLE_RESUME_MS)
+  }, [advance])
+  useEffect(() => () => clearTimeout(idleRef.current), [])
+
+  // Jump to a project (user-driven). touch() re-arms the idle window that resumes cycling.
+  const go = useCallback((i) => {
+    touch()
+    setS((cur) => (i === cur.active ? cur : { prev: cur.active, active: i, nonce: cur.nonce + 1 }))
+  }, [touch])
 
   // Track reduced-motion preference (disables auto-cycle so cards never swap unprompted).
   useEffect(() => {
@@ -85,12 +106,10 @@ export default function Projects() {
   // full 4800ms (interruptible) rather than restarting a fixed keyframe. Paused while the
   // user is interacting, the tab is hidden, or reduced motion is on.
   useEffect(() => {
-    if (reduced || hovering || focused || hidden) return
-    const id = setTimeout(() => {
-      setS((cur) => ({ prev: cur.active, active: (cur.active + 1) % projects.length, nonce: cur.nonce + 1 }))
-    }, AUTO_CYCLE_MS)
+    if (reduced || hovering || engaged || hidden) return
+    const id = setTimeout(advance, AUTO_CYCLE_MS)
     return () => clearTimeout(id)
-  }, [s.active, hovering, focused, hidden, reduced])
+  }, [s.active, hovering, engaged, hidden, reduced, advance])
 
   const project = projects[s.active]
   const activeNum = '0' + (s.active + 1)
@@ -100,8 +119,7 @@ export default function Projects() {
       id="projects"
       className="section"
       aria-label="Projects"
-      onFocus={() => setFocused(true)}
-      onBlur={() => setFocused(false)}
+      onFocus={touch}
     >
       <Starfield count={60} seed={88} maxSize={1.9} />
 
