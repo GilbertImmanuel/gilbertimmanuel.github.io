@@ -85,7 +85,6 @@
   var starLayers = document.getElementById('starLayers');
   var svg = document.getElementById('lineLayer');
   var sparks = document.getElementById('sparkLayer');
-  var btnRow = document.getElementById('btnRow');
   var rnd = Math.random;
 
   // ---- twinkling starfield (decorative; no scroll, so no parallax) ----
@@ -132,9 +131,9 @@
   }
 
   function down(e) {
+    if (e.target.closest('a')) return; // let the CTA links click through
     var p = point(e);
     drawing = true;
-    btnRow.style.pointerEvents = 'none';
     anchor = { x: p.x, y: p.y };
     target = 70 + Math.random() * 120;
     addStar(p.x, p.y, true);
@@ -161,7 +160,6 @@
 
   function up() {
     drawing = false;
-    btnRow.style.pointerEvents = 'auto';
     if (live) live.remove();
     live = null;
   }
