@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <meta name="color-scheme" content="dark" />
+  <meta name="theme-color" content="#070a1a" />
+  <meta name="robots" content="noindex" />
+  <title>404 · Gilbert Immanuel Hasiholan</title>
+  <style>
+    /* Self-hosted fonts (match src/fonts.css) — no render-blocking CDN. */
+    @font-face { font-family: 'Cormorant Garamond'; font-style: normal; font-weight: 500; font-display: swap; src: url('/fonts/cormorant-normal-500.woff2') format('woff2'); }
+    @font-face { font-family: 'Manrope'; font-style: normal; font-weight: 400; font-display: swap; src: url('/fonts/manrope-normal-400.woff2') format('woff2'); }
+    @font-face { font-family: 'Manrope'; font-style: normal; font-weight: 500; font-display: swap; src: url('/fonts/manrope-normal-500.woff2') format('woff2'); }
+    @font-face { font-family: 'Space Mono'; font-style: normal; font-weight: 400; font-display: swap; src: url('/fonts/spacemono-normal-400.woff2') format('woff2'); }
+
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; background: #070a1a; }
+    @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; transition-duration: 0.001ms !important; } }
+    @keyframes twinkle { 0%, 100% { opacity: 0.2; } 50% { opacity: 1; } }
+    @keyframes eclipseSpin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+    @keyframes moonFloat404 { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-14px); } }
+    @keyframes digitFloatA { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-9px); } }
+    @keyframes digitFloatB { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
+    @keyframes riseIn { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: none; } }
+    @keyframes ruleGrow { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+    @keyframes constLife { 0% { opacity: 0; } 6% { opacity: 1; } 70% { opacity: 1; } 100% { opacity: 0; } }
+
+    .btn { font-family: 'Space Mono', monospace; font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; padding: 13px 26px; border-radius: 3px; text-decoration: none; }
+    .btn-primary { color: #0b1024; background: #c9a86a; border: 1px solid #c9a86a; transition: background 0.35s ease, box-shadow 0.35s ease, transform 0.35s cubic-bezier(0.22,1,0.36,1), letter-spacing 0.35s ease; }
+    .btn-ghost { color: #cfe0f2; border: 1px solid rgba(158,198,232,0.38); transition: border-color 0.35s ease, color 0.35s ease, background 0.35s ease, box-shadow 0.35s ease, transform 0.35s cubic-bezier(0.22,1,0.36,1), letter-spacing 0.35s ease; }
+    /* Hover only on real pointer devices — avoids tap-stick on touch (site convention). */
+    @media (hover: hover) {
+      .btn-primary:hover { background: #dfc48c; box-shadow: 0 0 28px rgba(201,168,106,0.45); transform: translateY(-3px); letter-spacing: 0.18em; }
+      .btn-ghost:hover { border-color: rgba(201,168,106,0.7); color: #f4f0e6; background: rgba(201,168,106,0.08); box-shadow: 0 0 22px rgba(158,198,232,0.18); transform: translateY(-3px); letter-spacing: 0.18em; }
+    }
+    .btn:focus-visible { outline: 2px solid #e6cf9a; outline-offset: 3px; }
+  </style>
+</head>
+<body>
+
+<div id="scene" style="position: relative; width: 100%; min-height: 100svh; overflow: hidden; background: #070a1a; background-image: radial-gradient(85% 30% at 50% 6%, rgba(42,58,116,0.5) 0%, rgba(7,10,26,0) 60%), radial-gradient(70% 24% at 100% 40%, rgba(30,44,92,0.42) 0%, rgba(7,10,26,0) 55%), radial-gradient(72% 24% at 0% 70%, rgba(36,52,104,0.42) 0%, rgba(7,10,26,0) 55%), radial-gradient(95% 28% at 50% 98%, rgba(42,58,116,0.55) 0%, rgba(7,10,26,0) 62%); font-family: 'Manrope', sans-serif; user-select: none; -webkit-user-select: none; display: flex; align-items: center; justify-content: center; cursor: crosshair;">
+
+  <div id="starLayers" style="position: absolute; inset: 0; pointer-events: none; z-index: 1; overflow: hidden;"></div>
+  <svg id="lineLayer" style="position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 2; overflow: visible;"></svg>
+  <div id="sparkLayer" style="position: absolute; inset: 0; pointer-events: none; overflow: hidden; z-index: 3;"></div>
+
+  <!-- faint moon halo behind the composition -->
+  <div style="position: absolute; top: 46%; left: 50%; width: 620px; height: 620px; margin: -310px 0 0 -310px; border-radius: 50%; background: radial-gradient(circle at 50% 45%, rgba(220,230,244,0.15) 0%, rgba(174,191,220,0.05) 42%, rgba(7,10,26,0) 70%); pointer-events: none; z-index: 1;"></div>
+
+  <div style="position: relative; z-index: 4; width: min(880px, 88vw); padding: clamp(40px, 8vh, 56px) clamp(16px, 5vw, 24px); display: flex; flex-direction: column; align-items: center; text-align: center; pointer-events: none;">
+
+    <div style="font-family: 'Space Mono', monospace; font-size: 12px; letter-spacing: 0.34em; text-transform: uppercase; color: #9ec6e8; margin-bottom: 30px; animation: riseIn 0.8s ease both;">Error</div>
+
+    <!-- 404 with an eclipsed moon as the zero -->
+    <div style="display: flex; align-items: center; justify-content: center; gap: clamp(8px, 2vw, 26px); animation: riseIn 0.9s ease 0.05s both;">
+      <span style="font-family: 'Cormorant Garamond', serif; font-weight: 500; font-size: clamp(64px, 17vw, 210px); line-height: 0.9; color: #f4f0e6; animation: digitFloatA 6.5s ease-in-out infinite; text-shadow: 0 0 40px rgba(158,198,232,0.18);">4</span>
+
+      <span style="position: relative; width: clamp(58px, 15vw, 186px); height: clamp(58px, 15vw, 186px); display: block; flex: none; animation: moonFloat404 7.5s ease-in-out infinite;">
+        <span style="position: absolute; inset: 0; border-radius: 50%; background: radial-gradient(circle at 36% 32%, #f7f3e8 0%, #dfe6f2 45%, #9fb0cd 100%); box-shadow: 0 0 60px 8px rgba(214,228,248,0.28), inset -10px -8px 26px rgba(30,40,72,0.5); display: block;"></span>
+        <span style="position: absolute; inset: 0; border-radius: 50%; overflow: hidden; display: block; animation: eclipseSpin 26s linear infinite;">
+          <span style="position: absolute; top: -6%; left: 30%; width: 78%; height: 112%; border-radius: 50%; background: #070a1a; display: block;"></span>
+        </span>
+        <span style="position: absolute; inset: -14%; border-radius: 50%; border: 1px solid rgba(201,168,106,0.35); display: block;"></span>
+      </span>
+
+      <span style="font-family: 'Cormorant Garamond', serif; font-weight: 500; font-size: clamp(64px, 17vw, 210px); line-height: 0.9; color: #f4f0e6; animation: digitFloatB 5.8s ease-in-out infinite; text-shadow: 0 0 40px rgba(158,198,232,0.18);">4</span>
+    </div>
+
+    <div style="width: clamp(120px, 22vw, 240px); height: 1px; background: linear-gradient(90deg, rgba(201,168,106,0) 0%, rgba(201,168,106,0.75) 50%, rgba(201,168,106,0) 100%); margin: clamp(28px, 5vh, 52px) 0 26px 0; animation: ruleGrow 1s ease 0.3s both;"></div>
+
+    <h1 style="font-family: 'Cormorant Garamond', serif; font-weight: 500; font-size: clamp(30px, 4.4vw, 52px); line-height: 1.1; color: #f4f0e6; margin: 0 0 38px 0; max-width: 520px; text-wrap: pretty; animation: riseIn 0.9s ease 0.4s both;">This page is not on the star chart</h1>
+
+    <div id="btnRow" style="display: flex; gap: 14px; flex-wrap: wrap; justify-content: center; pointer-events: auto; animation: riseIn 0.9s ease 0.6s both;">
+      <a href="/" class="btn btn-primary">Return home</a>
+      <a href="/#projects" class="btn btn-ghost">View projects</a>
+    </div>
+  </div>
+</div>
+
+<script>
+(function () {
+  var scene = document.getElementById('scene');
+  var starLayers = document.getElementById('starLayers');
+  var svg = document.getElementById('lineLayer');
+  var sparks = document.getElementById('sparkLayer');
+  var btnRow = document.getElementById('btnRow');
+  var rnd = Math.random;
+
+  // ---- twinkling starfield (decorative; no scroll, so no parallax) ----
+  for (var i = 0; i < 130; i++) {
+    var size = rnd() * 2.6 + 0.5;
+    var gold = rnd() > 0.82;
+    var s = document.createElement('span');
+    s.style.cssText =
+      'position:absolute;top:' + (rnd() * 100) + '%;left:' + (rnd() * 100) + '%;' +
+      'width:' + size + 'px;height:' + size + 'px;border-radius:50%;' +
+      'background:' + (gold ? '#e6cf9a' : '#eaf1fb') + ';' +
+      'box-shadow:' + (gold ? '0 0 6px 1px rgba(230,207,154,0.7)' : '0 0 5px 1px rgba(200,220,250,0.6)') + ';' +
+      'animation:twinkle ' + (2.5 + rnd() * 4).toFixed(2) + 's ease-in-out ' + (rnd() * 5).toFixed(2) + 's infinite;';
+    starLayers.appendChild(s);
+  }
+
+  // ---- drag-to-draw constellations ----
+  var drawing = false, live = null, anchor = { x: 0, y: 0 }, target = 110;
+
+  function addStar(x, y, big) {
+    var size = big ? 4.5 : 3.2;
+    var s = document.createElement('span');
+    s.style.cssText = 'position:absolute;left:' + x + 'px;top:' + y + 'px;width:' + size + 'px;height:' + size + 'px;margin:' + (-size / 2) + 'px 0 0 ' + (-size / 2) + 'px;border-radius:50%;background:#f7f1e2;box-shadow:0 0 10px 2px rgba(230,207,154,0.85),0 0 22px 6px rgba(230,207,154,0.25);animation:constLife 9s ease forwards;';
+    sparks.appendChild(s);
+    setTimeout(function () { s.remove(); }, 9200);
+  }
+
+  function newLine(x, y, isLive) {
+    var ln = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+    ln.setAttribute('x1', x); ln.setAttribute('y1', y);
+    ln.setAttribute('x2', x); ln.setAttribute('y2', y);
+    ln.setAttribute('stroke', isLive ? 'rgba(201,168,106,0.5)' : 'rgba(201,168,106,0.75)');
+    ln.setAttribute('stroke-width', isLive ? '1' : '1.2');
+    ln.setAttribute('stroke-linecap', 'round');
+    if (isLive) ln.setAttribute('stroke-dasharray', '3 5');
+    svg.appendChild(ln);
+    return ln;
+  }
+
+  function point(e) {
+    var r = scene.getBoundingClientRect();
+    var t = e.touches ? e.touches[0] : e;
+    return { x: t.clientX - r.left, y: t.clientY - r.top };
+  }
+
+  function down(e) {
+    var p = point(e);
+    drawing = true;
+    btnRow.style.pointerEvents = 'none';
+    anchor = { x: p.x, y: p.y };
+    target = 70 + Math.random() * 120;
+    addStar(p.x, p.y, true);
+    live = newLine(p.x, p.y, true);
+  }
+
+  function commit(x, y) {
+    var solid = newLine(anchor.x, anchor.y, false);
+    solid.setAttribute('x2', x); solid.setAttribute('y2', y);
+    solid.style.animation = 'constLife 9s ease forwards';
+    setTimeout(function () { solid.remove(); }, 9200);
+    addStar(x, y, false);
+    anchor = { x: x, y: y };
+    target = 70 + Math.random() * 120;
+    if (live) { live.setAttribute('x1', x); live.setAttribute('y1', y); live.setAttribute('x2', x); live.setAttribute('y2', y); }
+  }
+
+  function move(e) {
+    if (!drawing || !live) return;
+    var p = point(e);
+    live.setAttribute('x2', p.x); live.setAttribute('y2', p.y);
+    if (Math.hypot(p.x - anchor.x, p.y - anchor.y) > target) commit(p.x, p.y);
+  }
+
+  function up() {
+    drawing = false;
+    btnRow.style.pointerEvents = 'auto';
+    if (live) live.remove();
+    live = null;
+  }
+
+  scene.addEventListener('mousedown', down);
+  scene.addEventListener('mousemove', move);
+  scene.addEventListener('mouseup', up);
+  scene.addEventListener('mouseleave', up);
+  scene.addEventListener('touchstart', down, { passive: true });
+  scene.addEventListener('touchmove', move, { passive: true });
+  scene.addEventListener('touchend', up);
+})();
+</script>
+</body>
+</html>
